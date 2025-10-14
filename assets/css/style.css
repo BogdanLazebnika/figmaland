@@ -1,0 +1,258 @@
+/* ================== ЗМІННІ ================== */
+:root {
+    --primary: #4452fe;
+    --secondary-light: #02e4c0;
+    --secondary-dark: #8a8a8a;
+    --first-text: #000;
+    --light-text: #fff;
+    --second-text: #5c5c5c;
+    --dark-background: #181818;
+    --light-background: #fff;
+    --font-family: "Graphik", sans-serif;
+}
+
+/* ================== БАЗОВІ СТИЛІ ================== */
+body {
+    background-color: red;
+    font-family: var(--font-family);
+    margin: 0;
+}
+
+a, a:focus, a:active {
+    outline: none;
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ================== ШАПКА ================== */
+#header {
+    background-color: var(--dark-background);
+    align-items: center;
+    padding: 0;
+    position: relative;
+}
+
+.container-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1097px;
+    padding: 20px 40px;
+    flex-wrap: nowrap;
+}
+
+/* ---------- ЛОГО ---------- */
+.logo {
+    padding: 10px;
+}
+
+.logo__link {
+    position: relative;
+    display: inline-block;
+    padding: 10px;
+}
+
+.logo__link img {
+    display: block;
+    width: 150px; /* стандартний розмір логотипу */
+}
+
+.logo__link::before,
+.logo__link::after {
+    content: '';
+    position: absolute;
+    background-color: var(--secondary-dark);
+    transition: all 0.4s ease;
+}
+
+.logo__link::before { height: 2px; width: 0; left: 0; bottom: 0; }
+.logo__link::after { width: 2px; height: 0; right: 0; bottom: 0; }
+
+.logo__link:hover::before { width: 100%; transition-delay: 0s; }
+.logo__link:hover::after { height: 100%; transition-delay: 0.2s; }
+
+.logo__link span { pointer-events: none; }
+
+.logo__link .top-line,
+.logo__link .left-line {
+    content: '';
+    position: absolute;
+    background-color: var(--secondary-dark);
+    transition: all 0.2s ease;
+}
+
+.logo__link .top-line { height: 2px; width: 0; top: 0; right: 0; }
+.logo__link .left-line { width: 2px; height: 0; top: 0; left: 0; }
+
+.logo__link:hover .top-line { width: 100%; transition-delay: 0.45s; }
+.logo__link:hover .left-line { height: 100%; transition-delay: 0.6s; }
+
+/* ================== МЕНЮ ================== */
+.menu__list {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+
+.menu__list li a {
+    position: relative;
+    display: block;
+    padding: 10px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: 0.01em;
+    color: var(--light-text);
+    transition: color 0.3s ease;
+}
+
+.menu__list li a::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--secondary-dark);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.menu__list li a:hover::before {
+    transform: scaleX(1);
+}
+
+.menu__list li a:hover {
+    color: var(--secondary-dark);
+}
+
+/* ================== КНОПКИ ================== */
+.button-login {
+    position: relative;
+    border: 1px solid var(--light-text);
+    padding: 10px 46px;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 147%;
+    letter-spacing: 0.01em;
+    color: var(--light-text);
+    background-color: transparent;
+    cursor: pointer;
+    overflow: hidden;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.button-login span { position: relative; z-index: 1; }
+
+.button-login::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1), rgba(255,255,255,0.2));
+    z-index: 0;
+    transform: scaleX(0); /* спочатку не видно */
+    transform-origin: center; /* розширюється від центру */
+    transition: transform 0.4s ease;
+}
+
+.button-login:hover::before {
+    transform: scaleX(1); /* розкривається по центру */
+}
+
+
+.button-login:hover::before { left: 0; }
+.button-login:hover { transform: scale(0.98); color: var(--secondary-dark); }
+.button-login:active { transform: scale(0.95); }
+
+/* Кнопка для мобільного меню */
+.button-login-mobile { display: none; margin: 10px auto; }
+
+/* ================== ГАМБУРГЕР ================== */
+.menu-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    position: relative;
+}
+
+.menu-toggle span {
+    display: block;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--light-text);
+    border-radius: 2px;
+    transition: transform 0.4s ease, top 0.4s ease, opacity 0.4s ease;
+}
+
+/* Встановлюємо початкові позиції смужок */
+.menu-toggle span:nth-child(1) { top: 0; }
+.menu-toggle span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+.menu-toggle span:nth-child(3) { bottom: 0; }
+
+/* Активний хрестик */
+.menu-toggle.active span:nth-child(1) {
+    top: 50%;
+    transform: rotate(45deg);
+}
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+.menu-toggle.active span:nth-child(3) {
+    top: 50%;
+    transform: rotate(-45deg);
+}
+
+
+/* ================== АДАПТИВ ================== */
+@media (max-width: 1024px) {
+    .menu__list {
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--dark-background);
+        overflow: hidden;
+        height: 0; /* початкова висота */
+        transition: height 0.5s ease;
+        text-align: center;
+    }
+    .menu__list li a::before{
+        transform-origin: center;
+    }
+
+    .menu__list.active { max-height: 800px; }
+
+    .menu-toggle { display: flex; }
+}
+
+@media (max-width: 768px) {
+    .container-header { flex-wrap: wrap; justify-content: space-between; padding: 15px 20px; }
+    .container-button-login { order: 1; }
+    .menu-toggle { order: 2; margin-left: auto; }
+}
+
+@media (max-width: 480px) {
+    .logo__link img { width: 120px; }
+    .button-login { display: none; }
+    .button-login-mobile { display: flex; }
+    .menu__list li { width: 100%; }
+    .menu__list li a { padding: 15px 20px; }
+    .menu__list.active { max-height: 1000px; }
+}
